@@ -19,7 +19,7 @@ volume.addEventListener("input", function() {
 	audioTag.volume = volume.value;
 })
 
-//add repeat button
+//add repeat checkbox
 var repeatButton = document.createElement("input");
 var repeatButtonLabel = document.createElement("span");
 progressBar.appendChild(repeatButton);
