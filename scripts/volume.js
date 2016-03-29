@@ -1,40 +1,32 @@
-//add volume button
-var progressBar = document.querySelector(".progbar");
-var audioTag = document.querySelector("audio");
-var playButton = document.querySelector(".playbutton");
-var volume = document.createElement("input");
-var audioSource;
+var progbar = $('.progbar');
+var audio = $('audio');
 
-progressBar.appendChild(volume);
-volume.type = "range";
-volume.min = "0.0";
-volume.max = "1.0";
-volume.step = "0.01";
-volume.value = "1.0";
+var volume = $('<input>').attr({
+	id: 'volume',
+	type: 'range',
+	min: '0.0',
+	max: '1.0',
+	step: '0.01',
+	value: '1.0'
+}).appendTo(progbar);
 
-playButton.addEventListener("click", function() {
-	audioSource = audioTag.getAttribute("src");
-})
-volume.addEventListener("input", function() {
-	audioTag.volume = volume.value;
-})
+var repeatButton = $('<input>').attr({
+	class: 'repeatButton',
+	type: 'checkbox'
+}).appendTo(progbar);
 
-//add repeat checkbox
-var repeatButton = document.createElement("input");
-var repeatButtonLabel = document.createElement("span");
-progressBar.appendChild(repeatButton);
-progressBar.appendChild(repeatButtonLabel);
-repeatButton.class = "repeatButton";
-repeatButton.type = "checkbox";
-repeatButtonLabel.textContent = "repeat";
+var repeatButtonLabel = $('<span>').text('repeat').appendTo(progbar);
 
-repeatButton.addEventListener("click", function() {
-	if(repeatButton.checked) {
-		repeatButton.setAttribute("checked", "");
-		audioTag.setAttribute("loop", "");
+volume.on('input', function() {
+  "use strict";
+	audio[0].volume = volume[0].value;
+});
+
+repeatButton.click(function() {
+  "use strict";
+	if(repeatButton[0].checked) {
+		audio.attr('loop', 'loop');
 	} else {
-		repeatButton.removeAttribute("checked");
-		audioTag.removeAttribute("loop");
+		audio.removeAttr('loop');
 	}
-})
-
+});
